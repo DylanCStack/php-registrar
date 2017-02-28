@@ -51,6 +51,11 @@
             $this->setLastName($new_last_name);
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
+        }
+
         static function find($id)
         {
             $returned_students = $GLOBALS['DB']->query("SELECT * FROM students WHERE id={$id};");
@@ -91,5 +96,7 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM students;");
         }
+
+
     }
 ?>

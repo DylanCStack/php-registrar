@@ -83,5 +83,26 @@
             $this->assertEquals($test_student->getFirstName(), $result);
         }
 
+        function test_delete()
+        {
+            // Arrange
+            $first = "Sean";
+            $last = "Peterson";
+            $id = null;
+            $new_student = new Student($first, $last, $id);
+            $new_student->save();
+
+            $first2 = "Clayton";
+            $last2 = "Lopez";
+            $id2 = null;
+            $new_student2 = new Student($first2, $last2, $id2);
+            $new_student2->save();
+            // Act
+            $new_student->delete();
+            $result = Student::getAll();
+            // Assert
+            $this->assertEquals([$new_student2],$result);
+        }
+
     }
 ?>
