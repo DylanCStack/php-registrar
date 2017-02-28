@@ -118,5 +118,27 @@
             $this->assertEquals([$test_course2],$result);
         }
 
+        function test_addStudent()
+        {
+            $name = "Jamaican Basket Weaving 101";
+            $description = "Everything you think and more";
+            $prof_name = "Dr. Doctorof";
+            $units = 3;
+            $id = null;
+            $test_course= new Course($name, $description, $prof_name, $units, $id);
+            $test_course->save();
+
+            $first = "Sean";
+            $last = "Peterson";
+            $id2 = null;
+            $test_student = new Student($first, $last, $id2);
+            $test_student->save();
+            //Act
+            $test_course->addStudent($test_student);
+            $result = $test_course->getStudents();
+            //Assert
+            $this->assertEquals($result, [$test_student]);
+        }
+
     }
 ?>

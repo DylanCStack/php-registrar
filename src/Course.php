@@ -83,6 +83,28 @@
             $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
         }
 
+        function addStudent($student)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO courses_students (course_id, student_id) VALUES ({$this->getId()}, {$student->getId()});");
+        }
+
+        function getStudents()
+        {
+            $returned_students = $GLOBALS['DB']->query(
+            "SELECT students.* FROM courses JOIN courses_students ON (courses_students.course_id = courses.id) JOIN students ON (students.id = courses_students.student_id) WHERE courses.id = {$this->getId()};");
+
+            $students = [];
+            foreach($returned_students as $student)
+            {
+                $first = $student['first_name'];
+                $last = $student['last_name'];
+                $id = $student['id'];
+                $new_student = new Student($first, $last, $id);
+                array_push($students, $new_student);
+            }
+            return $students;
+        }
+
         static function find($id)
         {
             $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses WHERE id={$id};");

@@ -18,6 +18,7 @@
 
         function test_save()
         {
+            Student::deleteAll();
             $first = "Clayton";
             $last = "Smith";
             $id = null;
