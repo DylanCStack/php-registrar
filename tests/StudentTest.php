@@ -4,6 +4,7 @@
     * @backupStaticAttributes disabled
     */
     require_once 'src/Student.php';
+    require_once 'src/Course.php';
     $server = 'mysql:host=localhost:8889;dbname=registrar_test';
     $username = 'root';
     $password = 'root';
@@ -14,11 +15,11 @@
         protected function tearDown()
         {
             Student::deleteAll();
+            Course::deleteAll();
         }
 
         function test_save()
         {
-            Student::deleteAll();
             $first = "Clayton";
             $last = "Smith";
             $id = null;
@@ -104,6 +105,31 @@
             // Assert
             $this->assertEquals([$new_student2],$result);
         }
+
+        function test_addCourse()
+        {
+            // Arrange
+            $first = "Sean";
+            $last = "Peterson";
+            $id = null;
+            $new_student = new Student($first, $last, $id);
+            $new_student->save();
+
+            $name = "sound design for the deaf";
+            $description = "I have no words to describe this";
+            $prof_name = "Profesor Bland";
+            $units = 5;
+            $id = null;
+            $new_course = new Course($name, $description, $prof_name, $units, $id);
+            $new_course->save();
+
+            // Act
+            $new_student->addCourse($new_course);
+            $result = $new_student->getCourses();
+            // Assert
+            $this->assertEquals([$new_course], $result);
+        }
+
 
     }
 ?>
