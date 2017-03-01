@@ -1,0 +1,39 @@
+{{ include('base.html.twig') }}
+
+<body>
+    <div class="container">
+        <h1>{{student.getFirstName}} {{student.getLastName}}</h1>
+
+        {% if student is not empty %}
+        <form class="" action="index.html" method="post">
+            
+        </form>
+        {% else %}
+        <p>You made a mistake, go home <a class="btn btn-md btn-primary" href="/">Home</a></p>
+        {% endif %}
+
+        {% if myCourses is not empty %}
+        <ul>
+            {% for course in myCourses %}
+            <li>{{course.getName}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form  action="/add-course/{{student.getId}}" method="post">
+            <div class="form-group">
+                <label for="first-name">Enroll in a course</label>
+            </div>
+            <div class="form-group">
+                <select name="course">
+                    {% for course in courses %}
+                        <option value ="{{course.getId}}">{{course.getName}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-success" name="button">Add Course</button>
+        </form>
+        <a class="btn btn-md btn-primary" href="/">Home</a>
+    </div>
+</body>
