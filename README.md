@@ -1,9 +1,9 @@
-#University Registrar
-###Authored by Dylan Stackhouse & Felix Oporto, 2/28/17
-#Description
+# University Registrar
+### Authored by Dylan Stackhouse & Felix Oporto, 2/28/17
+# Description
 A web app to allow a university registrar to create courses and assign new students to them.
 
-#Specs
+# Specs
 1. Program can save new students
 2. Program can delete students
 3. Program can update students
